@@ -1,0 +1,70 @@
+$primary-color: #001529;
+
+.card{
+    margin-left: 1rem;
+    border-radius: 5px;
+    border: none;
+
+    .title{
+        text-align: left;
+
+        .section__title{
+            color: rgb(56, 56, 61);
+            font-size: 18px;
+            line-height: 24px;
+            margin: 0px;
+        }
+    }
+
+    .shipping-method-list {
+        background: rgb(240, 248, 255);
+        border: 1px solid rgb(194, 225, 255);
+        border-radius: 10px;
+        padding: 16px;
+        display: grid;
+        row-gap: 12px;
+        z-index: 0;
+        margin-top: 16px;
+        width: 50%;
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+
+        .label {
+            font-size: 14px;
+            line-height: 20px;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            margin-left: 1rem;
+            
+            .method-logo {
+                margin-right: 4px;
+            }
+
+            .method-text {
+                font-size: 14px;
+                line-height: 20px;
+                color: rgb(56, 56, 61);
+            }
+
+            .freeship-badge {
+                font-size: 13px;
+                line-height: 20px;
+                font-weight: 500;
+                display: inline-flex;
+                -webkit-box-align: center;
+                align-items: center;
+                color: rgb(0, 171, 86);
+                padding: 0px 4px;
+                background-color: rgb(255, 255, 255);
+                margin-left: 4px;
+                border-radius: 4px;
+
+                img {
+                    margin-left: 4px;
+                }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,121 @@
+$primary-color: #001529;
+
+.container-border{
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgb(221, 221, 221);
+    margin-top: 20px;
+
+    .package-lead-time {
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        font-size: 14px;
+        line-height: 20px;
+        color: rgb(7, 148, 73);
+        padding: 4px 4px;
+        background-color: rgb(255, 255, 255);
+        position: absolute;
+        left: 60px;
+        transform: translateY(-50%);
+
+        .package-title {
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            margin-right: 8px;
+        }
+    }
+
+    .package-summary {
+        margin: 32px 0px 16px 30px ;
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+
+        .iSXbdM {
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+
+            .method-logo {
+                margin-right: 6px;
+            }
+
+            .method-text {
+                text-transform: uppercase;
+            }
+        }
+
+        .jEptqe {
+            font-size: 14px;
+            line-height: 20px;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            
+            .original-fee {
+                color: rgb(128, 128, 137);
+                text-decoration: line-through;
+                margin-right: 4px;
+            }
+
+            .current-fee{
+                color: rgb(56, 56, 61);
+                font-weight: 500;
+                margin-right: 24px;
+            }
+        }
+    }
+
+    .package-item-list{
+        .item-info{
+            font-size: 14px;
+            line-height: 16px;
+            color: rgb(128, 128, 137);
+            flex: 1 1 0%;
+            margin-left: 30px;
+
+            .item-info__first-line{
+                display: flex;
+                justify-content: space-between;
+
+                .item-info__product-name {
+                    color: $primary-color;
+                    display: -webkit-box;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                    font-weight: 500;
+                }
+
+                .item-info__qty {
+                    font-style: italic;
+                    font-size: 1em;
+                }
+                
+            }
+            
+            .item-info__second-line {
+                display: flex;
+                -webkit-box-pack: justify;
+                justify-content: space-between;
+
+                .item-info__desc {
+                    display: -webkit-box;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                }
+
+                .item-info__price {
+                    color: rgb(56, 56, 61);
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+}

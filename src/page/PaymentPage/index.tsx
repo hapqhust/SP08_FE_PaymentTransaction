@@ -1,9 +1,9 @@
-import { Col, Layout, Menu, MenuProps, Row } from 'antd';
+import { Col, Layout, Menu, MenuProps, Row, Steps } from 'antd';
 import { Content, Footer, Header } from 'antd/es/layout/layout';
 import Sider from 'antd/es/layout/Sider';
 import React from 'react';
-import CalculateMoney from '../../component/CalculateMoney';
-import PaymentContent from '../../component/PaymentContent';
+import LeftContent from '../../component/LeftContent';
+import RightContent from '../../component/RightContent';
 
 import "./PaymentPage.scss";
 
@@ -11,6 +11,8 @@ const items1: MenuProps['items'] = ['1', '2', '3'].map(key => ({
     key,
     label: `Title ${key}`,
   }));
+
+const description = 'This is a description.';
 
 const PaymentPage:React.FC = () => {
   return (
@@ -22,12 +24,32 @@ const PaymentPage:React.FC = () => {
             </Row>
         </Header>
         <Content>
-            <Row justify="start">
-                <Col span={16}>
-                    <PaymentContent/>
+            <Row className="mt-5" justify="center"><Col span={15}>
+                <Steps
+                    current={1}
+                    items={[
+                    {
+                        title: 'Giỏ hàng',
+                        description: "Xem giỏ hàng",
+                    },
+                    {
+                        title: 'Thanh toán',
+                        description: "Đặt hàng và thanh toán",
+                        // subTitle: 'Left 00:00:08',
+                    },
+                    {
+                        title: 'Hoàn thành đơn hàng',
+                        description: "Thanh toán thành công",
+                    },
+                    ]}
+                /></Col>
+            </Row>
+            <Row justify="center">
+                <Col span={14}>
+                    <LeftContent/>
                 </Col>
-                <Col span={8}>
-                    <CalculateMoney/>
+                <Col span={6}>
+                    <RightContent/>
                 </Col>
             </Row>
         </Content>

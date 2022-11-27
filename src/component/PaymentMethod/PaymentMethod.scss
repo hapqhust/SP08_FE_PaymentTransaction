@@ -1,0 +1,37 @@
+.radio{
+        margin-top: 1rem;
+        display: flex;
+        // width: 100%;
+        // -webkit-box-align: center;
+        align-items: center;
+        height: 100%;
+    .method-item {
+        justify-content: space-between;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        cursor: pointer;
+        height: 40px;
+
+        .method-icon {
+            margin-right: 12px;
+        }
+
+        .method-content {
+            margin-right: 12px;
+
+            .method-content__title {
+                font-size: 14px;
+                // line-height: 20px;
+                color: rgb(56, 56, 61);
+                display: flex;
+                -webkit-box-align: center;
+                align-items: center;
+            }
+        }
+    }
+}
+
+.ant-radio-group{
+    display: flex;
+}

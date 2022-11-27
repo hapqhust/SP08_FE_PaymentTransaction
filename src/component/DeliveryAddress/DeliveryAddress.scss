@@ -1,0 +1,53 @@
+$primary-color: #001529;
+.container{
+
+    .section__container{
+        .block-header{
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            margin-bottom: 12px;
+
+            .block-header__title {
+                color: rgb(110, 110, 111);
+                font-weight: normal;
+                font-size: medium;
+                margin: 0px;
+            }
+
+            .block-header__nav{
+                color: rgb(11, 116, 229);
+                text-decoration: none;
+            }
+        }
+
+        .customer_info {
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            color: rgb(56, 56, 61);
+            margin-bottom: 10px;
+            font-weight: 600;
+
+            .customer_info__name {
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+                overflow: hidden;
+            }
+
+            .customer_info__phone {
+
+            }
+        }
+        .address .tag{
+            display: inline-block;
+            -webkit-box-align: center;
+            align-items: center;
+            left: 0;
+            margin-right: 4px;
+        }
+    }
+}

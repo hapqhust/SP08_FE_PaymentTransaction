@@ -7,11 +7,12 @@ $primary-color: #001529;
         width: 50%;
         height: 32px;
         margin: 16px;
-        background: rgba(255, 255, 255, 0.2);
+        background: #f5f5fa;
     }
 }
 
 .footer{
+    margin-top: 5rem;
     background-color: $primary-color;
     min-height: 10rem;
     vertical-align: baseline;
