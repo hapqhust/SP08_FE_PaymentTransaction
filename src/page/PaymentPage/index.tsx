@@ -2,8 +2,8 @@ import React from 'react';
 import { Col, Menu, MenuProps, Row, Steps } from 'antd';
 import { Content, Footer, Header } from 'antd/es/layout/layout';
 
-import LeftContent from '../../component/LeftContent';
-import RightContent from '../../component/RightContent';
+import LeftContent from '../../component/PaymentScreen/LeftContent';
+import RightContent from '../../component/PaymentScreen/RightContent';
 
 import "./PaymentPage.scss";
 
