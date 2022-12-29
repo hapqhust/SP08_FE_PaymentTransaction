@@ -1,4 +1,4 @@
-import { Card, Col, Divider, Row } from 'antd'
+import { Col, Divider, Row } from 'antd'
 import React from 'react'
 
 import "./CalculateMoney.scss"

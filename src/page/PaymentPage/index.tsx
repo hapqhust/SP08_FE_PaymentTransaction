@@ -1,7 +1,7 @@
-import { Col, Layout, Menu, MenuProps, Row, Steps } from 'antd';
-import { Content, Footer, Header } from 'antd/es/layout/layout';
-import Sider from 'antd/es/layout/Sider';
 import React from 'react';
+import { Col, Menu, MenuProps, Row, Steps } from 'antd';
+import { Content, Footer, Header } from 'antd/es/layout/layout';
+
 import LeftContent from '../../component/LeftContent';
 import RightContent from '../../component/RightContent';
 
@@ -12,8 +12,7 @@ const items1: MenuProps['items'] = ['1', '2', '3'].map(key => ({
     label: `Title ${key}`,
   }));
 
-const description = 'This is a description.';
-
+// Trang thanh toans
 const PaymentPage:React.FC = () => {
   return (
     <div>
