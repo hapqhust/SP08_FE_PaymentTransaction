@@ -2,8 +2,8 @@ import { Avatar, List, Skeleton } from 'antd'
 import React, { useState } from 'react'
 
 import "./OrderDetail.scss"
-import { cart as data } from '../../data/cart' 
-import { Product } from '../../type/Product'
+import { cart as data } from '../../../data/cart' 
+import { Product } from '../../../type/Product'
 
 const OrderDetail = () => {
     const [initLoading, setInitLoading] = useState<boolean>(false);
