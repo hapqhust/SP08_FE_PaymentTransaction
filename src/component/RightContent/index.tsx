@@ -1,9 +1,7 @@
-import { Avatar, Card, Divider, List, Skeleton } from 'antd'
-import React, { useEffect, useState } from 'react'
+import {  Card,  } from 'antd'
+import React from 'react'
 import CalculateMoney from '../CalculateMoney'
 import DeliveryAdrress from '../DeliveryAddress'
-import DeliveryForm from '../DeliveryForm'
-import OrderDetail from '../OrderDetail'
 import PaymentMethod from '../PaymentMethod'
 
 import './RightContent.scss'

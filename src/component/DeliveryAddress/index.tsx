@@ -9,7 +9,7 @@ const DeliveryAdrress = () => {
             <div className="section__container">
                 <div className="block-header">
                     <h5 className="block-header__title">Giao tới</h5>
-                    <a className="block-header__nav" href="#">Thay đổi</a>
+                    <a className="block-header__nav" href="./">Thay đổi</a>
                 </div>
                 <div className="customer_info">
                     <Space size="large">
