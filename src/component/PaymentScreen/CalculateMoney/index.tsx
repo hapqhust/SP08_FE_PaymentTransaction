@@ -3,6 +3,7 @@ import { cart as data } from '../../../data/cart';
 import React from 'react'
 
 import "./CalculateMoney.scss"
+import { doTransactions } from '../../../service/transactions';
 
 interface DataType {
     id: number,
@@ -27,6 +28,21 @@ const CalculateMoney:React.FC = () => {
 
     const numberWithCommas = (x:number) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    const handlePayment = () => {
+        const data = {
+            customer_id: 1,
+            order_id: 2,
+            money: 15000,
+            payment_method: "vnpay"
+        }
+        doTransactions(data)
+            .then((val) =>{
+                console.log(val.data.url);
+                
+            });
+        
     }
 
     return (
@@ -73,7 +89,7 @@ const CalculateMoney:React.FC = () => {
                     <div className="order-total__additional-text">(Đã bao gồm VAT nếu có)</div>
                 </Col>
             </Row>
-            <button type="button" className="btn btn-payment">Thanh toán</button>
+            <button type="button" className="btn btn-payment" onClick={handlePayment}>Thanh toán</button>
         </div>
   )
 }

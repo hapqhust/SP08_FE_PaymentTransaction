@@ -113,7 +113,6 @@ const HistoryTransaction = () => {
       dataIndex: "createdAt",
       key: "createdAt",
       render: (text, record) => (
-        // <p>{record.created_at}</p>
         <p>{record.created_at ? moment(record.created_at).format('DD-MM-YYYY-HH:mm:SS') : ''}</p>
       ),
     },
