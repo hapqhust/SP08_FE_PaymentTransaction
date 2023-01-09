@@ -32,11 +32,12 @@
 
         .history-transaction-page__list-filter {
             .form-item{
+                font-size: 0.8rem;
                 font-weight: 600;
                 font-family: 'Noto Sans';
             }
             .button{
-                width: 100px;
+                width: 200px;
             }
         }
     }
@@ -72,7 +73,7 @@
 
 .history-transaction-page__button {
     width: 100%;
-    padding: 0 10px;
+    padding: 5 20px;
     background-color: #1081E8;
 }
 
