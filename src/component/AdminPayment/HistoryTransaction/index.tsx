@@ -12,18 +12,22 @@ import {
   Row,
   Space,
   Table,
+  Tag,
 } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined, SearchOutlined } from "@ant-design/icons";
 import { ColumnsType } from "antd/es/table";
 import "./style.scss";
 
 import { Transaction } from "../../../type/Transaction";
 import { list_transaction } from "../../../data/list_tran";
+import { getListTransaction } from "../../../service/dashboard";
+import moment from "moment";
+
 
 const HistoryTransaction = () => {
   const columns: ColumnsType<Transaction> = [
     {
-      title: "Mã giao dịch",
+      title: "STT",
       dataIndex: "id",
       key: "id",
       render: (text, record) => (
@@ -35,35 +39,85 @@ const HistoryTransaction = () => {
       ),
     },
     {
-      title: "Số tiền giao dịch",
-      dataIndex: "amount",
-      key: "amount",
+      title: "Mã thanh toán",
+      dataIndex: "payment_code",
+      key: "payment_code",
       render: (text, record) => (
-        <div className="tran-amount">
+        <div className="tran_payment_code">
           <Space size="middle">
-            <p>{record.amount}</p>
+            <p>{record.payment_code}</p>
           </Space>
         </div>
       ),
+    },
+    {
+      title: "Số tiền giao dịch",
+      dataIndex: "money",
+      key: "money",
+      render: (text, record) => {
+        if(record.status === "successful"){
+
+          if (record.type === "pay")
+          return(
+            <Space size="middle">
+                <p style = {{color: "#28a745", fontWeight: 700}}>{`+ ${record.money}`}</p>
+              </Space>);
+          else
+          return(
+            <Space size="middle">
+              <p style = {{color: "#dc3545", fontWeight: 700}}>{`- ${record.money}`}</p>
+            </Space>
+          );
+        }
+        else{
+          return(
+            <Space size="middle">
+                <p style = {{color: "#9e9fa0", fontWeight: 700}}>{`+ 0`}</p>
+              </Space>);
+        }
+      },
+    },
+    {
+      title: "Hình thức thanh toán",
+      dataIndex: "method",
+      key: "method",
+      render: (text, record) => (
+        <div className="tran-method">
+          <Space size="middle">
+            <p>{record.method.toUpperCase()}</p>
+          </Space>
+        </div>
+      ),
+    },
+    {
+      title: "Trạng thái giao dịch",
+      dataIndex: "status",
+      key: "status",
+      render: (text, record) => (
+        record.status === "successful" ?
+            <Tag icon={<CheckCircleOutlined />} color="success">
+              {record.status}
+            </Tag>
+          : record.status === "failed" ?
+            <Tag icon={<CloseCircleOutlined />} color="error">
+              {record.status}
+            </Tag>
+          :
+            <Tag icon={<ClockCircleOutlined />} color="default">
+                pending
+            </Tag>
+        ),
     },
     {
       title: "Thời điểm giao dịch",
       dataIndex: "createdAt",
       key: "createdAt",
       render: (text, record) => (
-        <p>{record.createdAt}</p>
-        // <p>{record.createdAt ? moment(record.createdAt).format('DD-MM-YYYY-HH:mm:SS') : ''}</p>
+        // <p>{record.created_at}</p>
+        <p>{record.created_at ? moment(record.created_at).format('DD-MM-YYYY-HH:mm:SS') : ''}</p>
       ),
     },
-    {
-      title: "Nội dung giao dịch",
-      dataIndex: "content",
-      key: "content",
-      render: (text, record) => (
-        <p>{record.content}</p>
-        // <p>{record.createdAt ? moment(record.createdAt).format('DD-MM-YYYY-HH:mm:SS') : ''}</p>
-      ),
-    },
+    
     // {
     //     title: '',
     //     dataIndex: 'action',
@@ -106,13 +160,15 @@ const HistoryTransaction = () => {
     isPaging: true,
   });
 
-  // useEffect(() => {
-  //     getApis(pagin)
-  //         .then((val) => {
-  //             setDataSource(val.data.data.result.apis);
-  //             setTotal(val.data.data.pagination.total);
-  //         })
-  // }, []);
+  useEffect(() => {
+      getListTransaction({})
+          .then((val) => {
+            setDataSource(val.data.data.data);
+            setTotal(val.data.data.total);
+            // console.log(val.data.data.data);
+            
+          })
+  }, []);
 
   // const handleOK = () => {
   //     setTimeout(() => {
@@ -128,14 +184,19 @@ const HistoryTransaction = () => {
   const [form] = Form.useForm();
 
   const handleSubmitForm = (value: any) => {
-    const data = { ...pagin, ...value };
-    console.log("handle submit");
+    const data = {
+      ...value,
+      created_at: value.created_at.format('YYYY-MM-DD')
+    };
+    console.log(data);
 
-    // getApis(data)
-    //     .then((val) => {
-    //         setDataSource(val.data.data.result.apis);
-    //         setTotal(val.data.data.pagination.total);
-    //     });
+    getListTransaction(data)
+        .then((val) => {
+          console.log(val.data.data.data);
+          
+          setDataSource(val.data.data.data);
+          setTotal(val.data.data.total);
+        });
   };
 
   const changePageSize = (current: number, pageSize: number) => {
@@ -187,42 +248,52 @@ const HistoryTransaction = () => {
               onFinish={handleSubmitForm}
             >
               <Row>
-                <Space size="large">
+                <Space size="middle">
                   <Col>
-                    <Form.Item label="API" name="name" className="form-item">
-                      <Input placeholder="VD: API predict" />
+                    <Form.Item label="Mã thanh toán" name="payment_code" className="form-item">
+                      <Input placeholder="" />
+                    </Form.Item>
+                  </Col>
+                  <Col>
+                    <Form.Item label="Trạng thái" name="status" className="form-item">
+                      <Input placeholder="" />
+                    </Form.Item>
+                  </Col>
+                  <Col>
+                    <Form.Item label="Phương thức" name="method" className="form-item">
+                      <Input placeholder="" />
                     </Form.Item>
                   </Col>
                   <Col>
                     <Form.Item
                       label="Ngày tạo"
-                      name="createdAt"
+                      name="created_at"
                       className="form-item"
                     >
-                      <DatePicker placeholder="Chọn ngày" />
-                    </Form.Item>
-                  </Col>
-                  <Col>
-                    <Form.Item>
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        className="history-transaction-page__button"
-                      >
-                        <Row justify="space-between">
-                          <Col>
-                            <SearchOutlined
-                              style={{ margin: "auto 0px", fontSize: "1rem" }}
-                            />
-                          </Col>
-                          <Col>
-                            <p style={{ margin: "auto 10px" }}>Tìm kiếm</p>
-                          </Col>
-                        </Row>
-                      </Button>
+                      <DatePicker placeholder="" />
                     </Form.Item>
                   </Col>
                 </Space>
+              </Row>
+              <Row justify="end">
+                <Form.Item>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="history-transaction-page__button"
+                  >
+                    <Row justify="space-between">
+                      <Col>
+                        <SearchOutlined
+                          style={{ margin: "auto 0px", fontSize: "1rem" }}
+                        />
+                      </Col>
+                      <Col>
+                        <p style={{ margin: "auto 10px" }}>Tìm kiếm</p>
+                      </Col>
+                    </Row>
+                  </Button>
+                </Form.Item>
               </Row>
             </Form>
           </div>

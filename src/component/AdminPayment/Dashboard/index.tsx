@@ -1,10 +1,11 @@
 import { Card, Col, Row } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import {
   Bar,
   BarChart,
   CartesianGrid,
   Cell,
+  ComposedChart,
   Legend,
   Line,
   LineChart,
@@ -16,66 +17,11 @@ import {
   YAxis,
 } from "recharts";
 import "./style.scss";
-
-const data = [
-  {
-    name: "30/12/2022",
-    "doanh thu": 40000,
-    "khoản chi": 9400,
-    "lợi nhuận": 40000 - 9400,
-  },
-  {
-    name: "31/12/2022",
-    "doanh thu": 34300,
-    "khoản chi": 11398,
-    "lợi nhuận": 34300 - 11398,
-  },
-  {
-    name: "01/01/2022",
-    "doanh thu": 20050,
-    "khoản chi": 9800,
-    "lợi nhuận": 20050 - 9800,
-  },
-  {
-    name: "02/01/2022",
-    "doanh thu": 31780,
-    "khoản chi": 7908,
-    "lợi nhuận": 31780 - 7908,
-  },
-  {
-    name: "03/01/2022",
-    "doanh thu": 58905,
-    "khoản chi": 14800,
-    "lợi nhuận": 58905 - 14800,
-  },
-  {
-    name: "04/01/2022",
-    "doanh thu": 50000,
-    "khoản chi": 15000,
-    "lợi nhuận": 50000 - 15000,
-  },
-  {
-    name: "05/01/2022",
-    "doanh thu": 58905,
-    "khoản chi": 7000,
-    "lợi nhuận": 58905 - 7000,
-  },
-];
-
-const data01 = [
-  {
-    name: "Ví MoMo",
-    value: 800,
-  },
-  {
-    name: "Ship COD",
-    value: 300,
-  },
-  {
-    name: "Ví VNPay",
-    value: 350,
-  },
-];
+import {
+  statistic_by_method,
+  statistic_by_month,
+  statistic_pay_and_return
+} from "../../../data/statistic";
 const COLORS = ["#0088FE", "#FFBB28", "#FF8042"];
 
 const RADIAN = Math.PI / 180;
@@ -106,41 +52,47 @@ const renderCustomizedLabel = ({
   );
 };
 
+interface PieDataset {
+  name: string, 
+  count: number,
+}
+
+const convert_pie = () => {
+  const key = Object.keys(statistic_by_method.method);
+  const value = Object.values(statistic_by_method.method);
+  const data = key.map((element, index)=>{
+    return({
+      name: element.toUpperCase(),
+      count: value[index] 
+    });
+  })
+  return data;
+}
+
 const Dashboard: React.FC = () => {
+  const [dataPie, setDataPie] = useState<PieDataset[]>(convert_pie());
+  const dataComposedChart = statistic_pay_and_return.results.map((element, index) =>{
+    return({
+      ...element,
+      profit: element.pay - element.refund  
+    });
+  });
+
   return (
     <React.Fragment>
       <div className="dashboard-page">
         <Card className="card mt-3">
           <header className="title">
             <h3 className="section__title">
-              Biều đồ doanh thu và chi tiêu theo ngày
+              Biều đồ doanh thu, tiền hoàn và lợi nhuận theo ngày
             </h3>
           </header>
           <Row>
             <ResponsiveContainer width="100%" height={400}>
-              <BarChart data={data}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="doanh thu" fill="#82ca9d" />
-                <Bar dataKey="khoản chi" fill="#8884d8" />
-              </BarChart>
-            </ResponsiveContainer>
-          </Row>
-        </Card>
-        <Row>
-          <Col span={15}>
-            <Card className="card mt-3">
-              <header className="title">
-                <h3 className="section__title2">Biều đồ lợi nhuận theo ngày</h3>
-              </header>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart
+                <ComposedChart
                   width={500}
                   height={300}
-                  data={data}
+                  data={dataComposedChart}
                   margin={{
                     top: 5,
                     right: 30,
@@ -149,12 +101,34 @@ const Dashboard: React.FC = () => {
                   }}
                 >
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
+                  <XAxis dataKey="date" />
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Line type="monotone" dataKey="lợi nhuận" stroke="#82ca9d" />
-                </LineChart>
+                  <Bar dataKey="pay" fill="#28a745" />
+                  <Bar dataKey="refund" fill="#17a2b8" />
+                  <Line type="monotone" dataKey="profit" stroke="#ff7300" />
+                </ComposedChart>
+            </ResponsiveContainer>
+          </Row>
+        </Card>
+        <Row>
+          <Col span={15}>
+            <Card className="card mt-3">
+              <header className="title">
+                <h3 className="section__title2">Biều đồ số giao dịch thành công/thất bại/đang xử lý theo tháng</h3>
+              </header>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={statistic_by_month}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="successful" fill="#28a745" />
+                  <Bar dataKey="failed" fill="#dc3545" />
+                  <Bar dataKey="pending" fill="#9e9fa0" />
+                </BarChart>
               </ResponsiveContainer>
             </Card>
           </Col>
@@ -176,8 +150,8 @@ const Dashboard: React.FC = () => {
                     // margin={{ right: 0}}
                   />
                   <Pie
-                    data={data01}
-                    dataKey="value"
+                    data={dataPie}
+                    dataKey="count"
                     nameKey="name"
                     cx="50%"
                     cy="50%"
@@ -188,7 +162,7 @@ const Dashboard: React.FC = () => {
                     legendType="diamond"
                     // onMouseEnter={handleMouseEnter}
                   >
-                    {data.map((entry, index) => (
+                    {dataPie.map((entry, index) => (
                       <Cell
                         key={`cell-${index}`}
                         fill={COLORS[index % COLORS.length]}

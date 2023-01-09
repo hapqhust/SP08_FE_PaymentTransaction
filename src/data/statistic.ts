@@ -1,0 +1,122 @@
+const statistic_by_method =  {
+  "method": {
+    "atm": 1,
+    "vnpay": 1,
+    "shipcod": 1
+  }
+}
+
+const statistic_by_month = [
+  {
+     "date":"2022-08",
+     "successful":0,
+     "failed":0,
+     "pending":0,
+     "total":0,
+     "success_percentage":0,
+     "fail_percentage":0
+  },
+  {
+     "date":"2022-09",
+     "successful":0,
+     "failed":0,
+     "pending":0,
+     "total":0,
+     "success_percentage":0,
+     "fail_percentage":0
+  },
+  {
+     "date":"2022-10",
+     "successful":0,
+     "failed":0,
+     "pending":0,
+     "total":0,
+     "success_percentage":0,
+     "fail_percentage":0
+  },
+  {
+     "date":"2022-11",
+     "successful":0,
+     "failed":0,
+     "pending":0,
+     "total":0,
+     "success_percentage":0,
+     "fail_percentage":0
+  },
+  {
+     "date":"2022-12",
+     "successful":0,
+     "failed":0,
+     "pending":0,
+     "total":0,
+     "success_percentage":0,
+     "fail_percentage":0
+  },
+  {
+     "date":"2023-01",
+     "successful":4,
+     "failed":1,
+     "pending":1,
+     "total":6,
+     "success_percentage":66.66666666666666,
+     "fail_percentage":16.666666666666664
+  }
+]
+
+const statistic_pay_and_return = {
+    "total_revenue":173000,
+    "total_cashback":18000,
+    "results": [
+      {
+        "date":"12-31",
+        "pay":0,
+        "refund":0
+      },
+      {
+        "date":"01-01",
+        "pay":0,
+        "refund":0
+      },
+      {
+        "date":"01-02",
+        "pay":0,
+        "refund":0
+      },
+      {
+        "date":"01-03",
+        "pay":0,
+        "refund":0
+      },
+      {
+        "date":"01-04",
+        "pay":0,
+        "refund":0
+      },
+      {
+        "date":"01-05",
+        "pay":58000,
+        "refund":18000
+      },
+      {
+        "date":"01-06",
+        "pay":105000,
+        "refund":0
+      },
+      {
+        "date":"01-07",
+        "pay":0,
+        "refund":0
+      },
+      {
+        "date":"01-08",
+        "pay":10000,
+        "refund":0
+      },
+      {
+        "date":"01-09",
+        "pay":0,
+        "refund":0
+      }
+    ]
+}
+export { statistic_by_method, statistic_by_month, statistic_pay_and_return }

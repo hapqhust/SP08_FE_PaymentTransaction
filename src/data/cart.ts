@@ -90,6 +90,7 @@ const cart: Product[] = [
         quantity: 1,
         type: "Camera",
         loading: false,
-    }];
+    }
+];
 
-    export {cart};
+export {cart};
