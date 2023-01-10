@@ -1,7 +1,7 @@
 import axios from "axios";
 import moment from "moment";
 
-const domain = "http://tungsnk.tech:8088";
+const domain = "https://tungsnk.tech:8088";
 
 function getListTransaction(data: {}) {
   const response = axios.get(`${domain}/api/admin/transactions`, {
