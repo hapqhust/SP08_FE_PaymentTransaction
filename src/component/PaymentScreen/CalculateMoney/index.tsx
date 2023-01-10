@@ -1,7 +1,8 @@
+
 import { Col, Divider, Row } from 'antd'
 import { cart as data } from '../../../data/cart';
 import React from 'react'
-
+import {Link} from "react-router-dom";
 import "./CalculateMoney.scss"
 import { doTransactions } from '../../../service/transactions';
 
@@ -32,15 +33,15 @@ const CalculateMoney:React.FC = () => {
 
     const handlePayment = () => {
         const data = {
-            customer_id: 1,
-            order_id: 2,
-            money: 15000,
-            payment_method: "vnpay"
+            customer_id: 2,
+            order_id: 3,
+            money: 9000,
+            payment_method: "shipcod"
         }
         doTransactions(data)
             .then((val) =>{
-                console.log(val.data.url);
-                
+                console.log(val.data.data.url);
+                window.open(val.data.data.url);
             });
         
     }

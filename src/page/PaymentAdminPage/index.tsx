@@ -3,7 +3,6 @@ import { Content, Footer, Header } from "antd/es/layout/layout";
 import React from "react";
 import Dashboard from "../../component/AdminPayment/Dashboard";
 import HistoryTransaction from "../../component/AdminPayment/HistoryTransaction";
-import PageApi from "../../component/AdminPayment/HistoryTransaction";
 
 const PaymentAdminPage: React.FC = () => {
   return (

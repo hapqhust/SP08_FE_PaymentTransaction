@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Col, Menu, MenuProps, Row, Steps } from 'antd';
 import { Content, Footer, Header } from 'antd/es/layout/layout';
 
@@ -14,13 +14,6 @@ const items1: MenuProps['items'] = ['1', '2', '3'].map(key => ({
 
 // Trang thanh toans
 const PaymentPage:React.FC = () => {
-    // useEffect(() => {
-    //     getListTransaction()
-    //         .then((val) => {
-    //           setDataSource(val.data.data.data);
-    //           setTotal(val.data.data.total);
-    //         })
-    // }, []);
   return (
     <div>
         <Header className="header">

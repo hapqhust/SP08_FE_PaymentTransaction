@@ -1,6 +1,6 @@
 import { Transaction } from "../type/Transaction";
 
-const list_transaction:Transaction[] = [
+const list_transaction = [
   {
     "id": 1,
     "customer_id": 1,

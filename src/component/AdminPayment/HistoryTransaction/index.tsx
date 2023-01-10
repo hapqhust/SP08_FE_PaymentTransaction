@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import {
   Button,
   Card,
@@ -20,8 +19,10 @@ import "./style.scss";
 
 import { Transaction } from "../../../type/Transaction";
 import { list_transaction } from "../../../data/list_tran";
-import { getListTransaction } from "../../../service/dashboard";
+import { getListTransaction } from "../../../service/dashboard"; 
+
 import moment from "moment";
+import Dashboard from "../Dashboard";
 
 
 const HistoryTransaction = () => {
@@ -144,9 +145,7 @@ const HistoryTransaction = () => {
     // },
   ];
 
-  const [dataSource, setDataSource] = useState(list_transaction);
-
-  const [visible, setVisible] = useState(false);
+  const [dataSource, setDataSource] = useState<Transaction[]>();
   const [total, setTotal] = useState(0);
   const [totalDetail, setTotalDetail] = useState({
     begin: 1,
@@ -164,7 +163,7 @@ const HistoryTransaction = () => {
           .then((val) => {
             setDataSource(val.data.data.data);
             setTotal(val.data.data.total);
-            // console.log(val.data.data.data);
+            console.log(val.data.data);
             
           })
   }, []);
@@ -183,16 +182,16 @@ const HistoryTransaction = () => {
   const [form] = Form.useForm();
 
   const handleSubmitForm = (value: any) => {
-    const data = {
-      ...value,
-      created_at: value.created_at.format('YYYY-MM-DD')
-    };
+      const new_created_at = value.created_at ? value.created_at.format('YYYY-MM-DD') : undefined
+
+      const data = {
+        ...value,
+        created_at: new_created_at
+      };
     console.log(data);
 
     getListTransaction(data)
         .then((val) => {
-          console.log(val.data.data.data);
-          
           setDataSource(val.data.data.data);
           setTotal(val.data.data.total);
         });

@@ -1,5 +1,5 @@
 import { Card, Col, Row } from "antd";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Bar,
   BarChart,
@@ -20,8 +20,9 @@ import "./style.scss";
 import {
   statistic_by_method,
   statistic_by_month,
-  statistic_pay_and_return
+  statistic_pay_and_return,
 } from "../../../data/statistic";
+import { getStatistic, getStatisticByMonth, getStatisticByPayAndRefund } from "../../../service/dashboard";
 const COLORS = ["#0088FE", "#FFBB28", "#FF8042"];
 
 const RADIAN = Math.PI / 180;
@@ -53,30 +54,63 @@ const renderCustomizedLabel = ({
 };
 
 interface PieDataset {
-  name: string, 
-  count: number,
-}
-
-const convert_pie = () => {
-  const key = Object.keys(statistic_by_method.method);
-  const value = Object.values(statistic_by_method.method);
-  const data = key.map((element, index)=>{
-    return({
-      name: element.toUpperCase(),
-      count: value[index] 
-    });
-  })
-  return data;
+  name: string;
+  count: number;
 }
 
 const Dashboard: React.FC = () => {
-  const [dataPie, setDataPie] = useState<PieDataset[]>(convert_pie());
-  const dataComposedChart = statistic_pay_and_return.results.map((element, index) =>{
-    return({
-      ...element,
-      profit: element.pay - element.refund  
+  const [dataPie, setDataPie] = useState();
+  const [dataComposedChart, setDataComposedChart] = useState();
+  const [dataByMonth, setDataByMonth] = useState();
+
+  useEffect(() => {
+    getStatistic()
+    .then((val) => {
+      setDataPie(val.data.data.method);
     });
-  });
+
+    getStatisticByPayAndRefund()
+    .then((val) =>{
+      console.log(val.data.data.results);
+      return val.data.data.results;
+      
+    })
+    .then((val) =>{
+      const data = val.map((element:any) => {
+          return {
+            ...element,
+            profit: element.pay - element.refund,
+          };
+        });
+      setDataComposedChart(data);
+    })
+    
+    getStatisticByMonth()
+    .then((val) =>{
+      setDataByMonth(val.data.data);
+    })
+    
+  }, []);
+
+  const convert_pie = (dataset: any) => {
+    if (dataset !==undefined){
+
+      const key = Object.keys(dataset);
+      const value = Object.values(dataset);
+      
+      const data = key.map((element, index) => {
+        return {
+            name: element.toUpperCase(),
+            count: value[index],
+          };
+        });
+      return data;
+    }
+    else{
+      return [];
+    }
+
+  };
 
   return (
     <React.Fragment>
@@ -89,26 +123,26 @@ const Dashboard: React.FC = () => {
           </header>
           <Row>
             <ResponsiveContainer width="100%" height={400}>
-                <ComposedChart
-                  width={500}
-                  height={300}
-                  data={dataComposedChart}
-                  margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                  }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="pay" fill="#28a745" />
-                  <Bar dataKey="refund" fill="#17a2b8" />
-                  <Line type="monotone" dataKey="profit" stroke="#ff7300" />
-                </ComposedChart>
+              <ComposedChart
+                width={500}
+                height={300}
+                data={dataComposedChart}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="pay" fill="#28a745" />
+                <Bar dataKey="refund" fill="#17a2b8" />
+                <Line type="monotone" dataKey="profit" stroke="#ff7300" />
+              </ComposedChart>
             </ResponsiveContainer>
           </Row>
         </Card>
@@ -116,10 +150,12 @@ const Dashboard: React.FC = () => {
           <Col span={15}>
             <Card className="card mt-3">
               <header className="title">
-                <h3 className="section__title2">Biều đồ số giao dịch thành công/thất bại/đang xử lý theo tháng</h3>
+                <h3 className="section__title2">
+                  Biều đồ số giao dịch thành công/thất bại/đang xử lý theo tháng
+                </h3>
               </header>
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={statistic_by_month}>
+                <BarChart data={dataByMonth}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="date" />
                   <YAxis />
@@ -150,7 +186,7 @@ const Dashboard: React.FC = () => {
                     // margin={{ right: 0}}
                   />
                   <Pie
-                    data={dataPie}
+                    data={convert_pie(dataPie)}
                     dataKey="count"
                     nameKey="name"
                     cx="50%"
@@ -162,7 +198,7 @@ const Dashboard: React.FC = () => {
                     legendType="diamond"
                     // onMouseEnter={handleMouseEnter}
                   >
-                    {dataPie.map((entry, index) => (
+                    {convert_pie(dataPie).map((entry, index) => (
                       <Cell
                         key={`cell-${index}`}
                         fill={COLORS[index % COLORS.length]}
