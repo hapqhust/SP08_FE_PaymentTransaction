@@ -73,7 +73,7 @@ const HistoryTransaction = () => {
         else{
           return(
             <Space size="middle">
-                <p style = {{color: "#9e9fa0", fontWeight: 700}}>{`+ 0`}</p>
+                <p style = {{color: "#9e9fa0", fontWeight: 700, textDecoration: "line-through"}}>{`+ ${record.money}`}</p>
               </Space>);
         }
       },
@@ -163,7 +163,7 @@ const HistoryTransaction = () => {
             setTotal(val.data.data.total);
             console.log(val.data.data);
           })
-  }, []);
+  }, [pagin]);
 
   const [form] = Form.useForm();
 
