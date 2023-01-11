@@ -153,31 +153,17 @@ const HistoryTransaction = () => {
   });
 
   const [pagin, setPagin] = useState({
-    page: 1,
-    pageSize: 10,
-    isPaging: true,
+    page: 1
   });
 
   useEffect(() => {
-      getListTransaction({})
+      getListTransaction(pagin)
           .then((val) => {
             setDataSource(val.data.data.data);
             setTotal(val.data.data.total);
             console.log(val.data.data);
-            
           })
   }, []);
-
-  // const handleOK = () => {
-  //     setTimeout(() => {
-  //         setVisible(false);
-  //         window.location.reload();
-  //     }, 3000);
-  // }
-
-  // const handleCancel = () => {
-  //     setVisible(false);
-  // }
 
   const [form] = Form.useForm();
 
@@ -198,30 +184,26 @@ const HistoryTransaction = () => {
   };
 
   const changePageSize = (current: number, pageSize: number) => {
-    // const newCurrent = Math.min(Math.ceil(total/pageSize), current);
-    // setPagin({
-    //     page: newCurrent,
-    //     pageSize: pageSize,
-    //     isPaging: true,
-    // });
-    // UpdatePagin(newCurrent, pageSize);
+    const newCurrent = Math.min(Math.ceil(total/pageSize), current);
+    setPagin({
+        page: newCurrent,
+    });
+    UpdatePagin(newCurrent, pageSize);
   };
 
   const UpdatePagin = (current: number, pageSize: number) => {
-    // const pagingData = {
-    //     page: current,
-    //     pageSize: pageSize,
-    //     isPaging: true,
-    // }
-    // getApis(pagingData)
-    //     .then((val) => {
-    //         setDataSource(val.data.data.result.apis);
-    //         setTotal(val.data.data.pagination.total);
-    //     });
-    // setTotalDetail({
-    //     begin: (current-1)*pageSize + 1,
-    //     end: Math.min(current*pageSize, total)}
-    // );
+    const pagingData = {
+        page: current,
+    }
+    getListTransaction(pagingData)
+        .then((val) => {
+          setDataSource(val.data.data.data);
+          setTotal(val.data.data.total);
+        });
+    setTotalDetail({
+        begin: (current-1)*pageSize + 1,
+        end: Math.min(current*pageSize, total)}
+    );
   };
   return (
     <>
@@ -302,9 +284,8 @@ const HistoryTransaction = () => {
               pagination={{
                 total: total,
                 defaultCurrent: pagin.page,
-                pageSize: pagin.pageSize,
+                pageSize: 10,
                 onChange: UpdatePagin,
-                showSizeChanger: true,
                 onShowSizeChange: changePageSize,
               }}
             />
