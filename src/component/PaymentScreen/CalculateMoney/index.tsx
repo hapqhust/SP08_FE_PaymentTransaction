@@ -36,7 +36,7 @@ const CalculateMoney:React.FC = () => {
             customer_id: 2,
             order_id: 3,
             money: 9000,
-            payment_method: "shipcod"
+            payment_method: "atm"
         }
         doTransactions(data)
             .then((val) =>{
