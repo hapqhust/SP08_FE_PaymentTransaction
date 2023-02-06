@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<PaymentPage />}></Route>
           <Route
-            path="/transactions/status-payment"
+            path="/transactions/status-payment" 
             element={<PaymentResult />}
           ></Route>
           <Route path="/admin" element={<PaymentAdminPage />}></Route>
