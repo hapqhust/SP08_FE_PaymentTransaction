@@ -34,12 +34,6 @@ const CalculateMoney: React.FC<Props> = ({ action, setAmount}) => {
       <div className="block-header">
         <div className="bSkntM" style={{ marginBottom: "4px" }}>
           <p className="block-header__title">TÓM TẮT ĐƠN HÀNG</p>
-          <a
-            className="block-header__nav"
-            href="/checkout/cart?src=checkout_payment"
-          >
-            Thay đổi
-          </a>
         </div>
         <div className="block-header__sub-title">
           <p className="sub-title-text">{`${data.length} sản phẩm.`}</p>
