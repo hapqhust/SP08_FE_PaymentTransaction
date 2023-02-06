@@ -7,7 +7,7 @@
 
 ## To run this project locally
 ### Prerequisites
-1. Make sure you've installed [node] version 16.15.0 or above
+1. Make sure you've installed [node] version 8 or above
 2. Make sure you've installed npm 
 
 ### Install libraby
