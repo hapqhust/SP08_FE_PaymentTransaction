@@ -31,11 +31,22 @@ const RightContent: React.FC = () => {
       }
       else{
         console.log(paymentMethod);
-          pushNotification(
-            "Thất bại",
-            "Hiện tại chức năng thanh toán shipCOD đang bảo trì, mời bạn chọn phương thức khác",
-            NOTIFICATION_TYPE.ERROR
-          );
+        var link = window.location.origin;
+        link += "/transactions/status-payment";
+        doTransactions(data)
+        .then((val) => {
+          window.open(val.data.data.url);
+        })
+        .catch((e) => {
+          setTimeout(()=>{
+            window.open(link);
+          }, 1000);
+        });
+          // pushNotification(
+          //   "Thất bại",
+          //   "Hiện tại chức năng thanh toán shipCOD đang bảo trì, mời bạn chọn phương thức khác",
+          //   NOTIFICATION_TYPE.ERROR
+          // );
       }
     } else {
         pushNotification(
