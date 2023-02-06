@@ -287,6 +287,7 @@ const HistoryTransaction = () => {
                 pageSize: 10,
                 onChange: UpdatePagin,
                 onShowSizeChange: changePageSize,
+                showSizeChanger: false,
               }}
             />
             <div className="history-transaction-page__bonus-footer">
