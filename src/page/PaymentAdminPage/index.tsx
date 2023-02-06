@@ -10,10 +10,10 @@ const PaymentAdminPage: React.FC = () => {
       <Header className="header">
         <Row justify="start">
           <Col span={4}>
-            <div className="logo" />
-          </Col>
-          <Col span={4}>
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]} />
+            <img
+              src="https://www.boipa.co.uk/wp-content/uploads/Payment-Gateway-Logo.png"
+              className="logo"
+            />
           </Col>
         </Row>
       </Header>
@@ -24,11 +24,11 @@ const PaymentAdminPage: React.FC = () => {
           </Col>
         </Row>
         <Row justify="center">
-          <Col span={18}>{<Dashboard/>}</Col>
+          <Col span={18}>{<Dashboard />}</Col>
         </Row>
       </Content>
       <Footer className="container-fluid footer">
-        <p className="text-white"> Design ©2022 Created by Team 08</p>
+        <p className="text-secondary"> Design ©2022 Created by Team 08</p>
       </Footer>
     </div>
   );

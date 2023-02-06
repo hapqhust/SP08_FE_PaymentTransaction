@@ -18,8 +18,7 @@ const PaymentPage:React.FC = () => {
     <div>
         <Header className="header">
             <Row justify="start">
-                <Col span={4}><div className="logo" /></Col>
-                <Col span={4}><Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} /></Col>
+                <Col span={4}><img src="https://www.boipa.co.uk/wp-content/uploads/Payment-Gateway-Logo.png" className="logo"/></Col>
             </Row>
         </Header>
         <Content>
@@ -53,7 +52,7 @@ const PaymentPage:React.FC = () => {
             </Row>
         </Content>
         <Footer className="container-fluid footer"> 
-            <p className='text-white'> Design ©2022 Created by Team 08</p>
+            <p className='text-secondary'> Design ©2022 Created by Team 08</p>
         </Footer>
     </div>
   )

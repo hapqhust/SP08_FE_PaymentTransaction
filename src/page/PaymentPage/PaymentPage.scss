@@ -1,19 +1,27 @@
-$primary-color: #001529;
+$primary-color: #FFF;
 
 .header{
     background-color: $primary-color;
+    box-shadow: 1px 1px 5px 5px #cecdcd;
 
     .logo {
         width: 50%;
-        height: 32px;
+        height: 36px;
         margin: 16px;
-        background: #f5f5fa;
     }
 }
 
 .footer{
     margin-top: 5rem;
+    padding-top: 3rem;
     background-color: $primary-color;
-    min-height: 10rem;
+    min-height: 8rem;
     vertical-align: baseline;
+    box-shadow: -1px -1px 5px 5px #cecdcd;
+
+    p{
+        font-weight: 500;
+        font-size: 1.1rem;
+        // margin-top: 5rem;
+    }
 }

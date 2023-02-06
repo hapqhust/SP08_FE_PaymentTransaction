@@ -4,7 +4,7 @@ const list_pay_method: PayMethodType[] = [
     {
       id: 1,
       icon_url:
-        "https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-cod.svg",
+        "https://cdn-icons-png.flaticon.com/512/2506/2506897.png",
       title: "Thanh toán tiền mặt khi nhận hàng",
     },
     {
