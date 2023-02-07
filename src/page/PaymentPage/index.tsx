@@ -21,7 +21,7 @@ const PaymentPage:React.FC = () => {
                 <Col span={4}><img src="https://www.boipa.co.uk/wp-content/uploads/Payment-Gateway-Logo.png" className="logo"/></Col>
             </Row>
         </Header>
-        <Content>
+        <Content className='content'>
             <Row className="mt-5" justify="center"><Col span={15}>
                 <Steps
                     current={1}

@@ -22,7 +22,11 @@ import {
   statistic_by_month,
   statistic_pay_and_return,
 } from "../../../data/statistic";
-import { getStatistic, getStatisticByMonth, getStatisticByPayAndRefund } from "../../../service/dashboard";
+import {
+  getStatistic,
+  getStatisticByMonth,
+  getStatisticByPayAndRefund,
+} from "../../../service/dashboard";
 const COLORS = ["#0088FE", "#FFBB28", "#FF8042"];
 
 const RADIAN = Math.PI / 180;
@@ -64,52 +68,45 @@ const Dashboard: React.FC = () => {
   const [dataByMonth, setDataByMonth] = useState();
 
   useEffect(() => {
-    getStatistic()
-    .then((val) => {
+    getStatistic().then((val) => {
       setDataPie(val.data.data.method);
     });
 
     getStatisticByPayAndRefund()
-    .then((val) =>{
-      console.log(val.data.data.results);
-      return val.data.data.results;
-      
-    })
-    .then((val) =>{
-      const data = val.map((element:any) => {
+      .then((val) => {
+        console.log(val.data.data.results);
+        return val.data.data.results;
+      })
+      .then((val) => {
+        const data = val.map((element: any) => {
           return {
             ...element,
             profit: element.pay - element.refund,
           };
         });
-      setDataComposedChart(data);
-    })
-    
-    getStatisticByMonth()
-    .then((val) =>{
+        setDataComposedChart(data);
+      });
+
+    getStatisticByMonth().then((val) => {
       setDataByMonth(val.data.data);
-    })
-    
+    });
   }, []);
 
   const convert_pie = (dataset: any) => {
-    if (dataset !==undefined){
-
+    if (dataset !== undefined) {
       const key = Object.keys(dataset);
       const value = Object.values(dataset);
-      
+
       const data = key.map((element, index) => {
         return {
-            name: element.toUpperCase(),
-            count: value[index],
-          };
-        });
+          name: element.toUpperCase(),
+          count: value[index],
+        };
+      });
       return data;
-    }
-    else{
+    } else {
       return [];
     }
-
   };
 
   return (
@@ -172,8 +169,8 @@ const Dashboard: React.FC = () => {
           <Col span={9}>
             <Card className="card mt-3">
               <header className="title">
-                <h3 className="section__title2">
-                  Biều đồ tỉ lệ sử dụng các phương thức thanh toán
+                <h3 className="section__title2">gi
+                  Biều đồ tỉ lệ các phương thức thanh toán
                 </h3>
               </header>
               <ResponsiveContainer width="100%" height={300}>

@@ -3,12 +3,21 @@ $primary-color: #FFF;
 .header{
     background-color: $primary-color;
     box-shadow: 1px 1px 5px 5px #cecdcd;
+    // position: fixed;
+    // width: 100%;
+    // top: 0;
+    // left: 0;
+    // z-index: 5;
 
     .logo {
         width: 50%;
         height: 36px;
         margin: 16px;
     }
+}
+
+.content{
+    // margin-top: 10rem;
 }
 
 .footer{

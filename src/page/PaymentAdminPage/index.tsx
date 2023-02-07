@@ -12,7 +12,7 @@ const PaymentAdminPage: React.FC = () => {
           <Col span={4}>
             <img
               src="https://www.boipa.co.uk/wp-content/uploads/Payment-Gateway-Logo.png"
-              className="logo"
+              className="logo" alt=""
             />
           </Col>
         </Row>
