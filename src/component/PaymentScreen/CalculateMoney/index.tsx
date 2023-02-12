@@ -11,6 +11,8 @@ interface Props {
 }
 
 const CalculateMoney: React.FC<Props> = ({ action, setAmount}) => {
+  const discount = 14000;
+  const shippingFee = 14000;
   const getTotal = () => {
     var sum = 0;
     data.forEach((item) => {
@@ -20,7 +22,7 @@ const CalculateMoney: React.FC<Props> = ({ action, setAmount}) => {
   };
 
   const getTotalMoney = () => {
-    const money = Math.round(getTotal() * 1.1 + (getTotal() === 0 ? 0 : 32000))
+    const money = Math.round(getTotal() * 1.1 + (getTotal() === 0 ? 0 : shippingFee - discount))
     setAmount(money)
     return money
   }
@@ -55,7 +57,7 @@ const CalculateMoney: React.FC<Props> = ({ action, setAmount}) => {
         <Row justify="space-between">
           <Col className="summary-label">Phí vận chuyển</Col>
           <Col className="summary-value">{`${numberWithCommas(
-            getTotal() === 0 ? 0 : 32000
+            getTotal() === 0 ? 0 : shippingFee
           )} ₫`}</Col>
         </Row>
         <Row justify="space-between">

@@ -15,8 +15,8 @@ const RightContent: React.FC = () => {
 
   const handlePayment = () => {
     const data = {
-      customer_id: 2,
-      order_id: 3,
+      customer_id: 1,
+      order_id: 10,
       money: amount,
       payment_method: paymentMethod,
     };

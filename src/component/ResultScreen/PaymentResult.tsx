@@ -14,7 +14,10 @@ const PaymentResult: React.FC = () => {
   const url_pending = "https://cdni.iconscout.com/illustration/premium/thumb/food-order-confirm-6853785-5639909.png";
   const url_fail = "https://img.freepik.com/premium-vector/payment-error-info-message-smartphone-customer-cross-marks-failure-vector-illustration_106788-3025.jpg?w=2000";
 
-
+  console.log(payCode);
+  console.log(money);
+  console.log(status);
+  
   const numberWithCommas = (x: string) => {
     return x.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
@@ -37,7 +40,7 @@ const PaymentResult: React.FC = () => {
                     Bạn đã thanh toán đơn hàng thành công
                   </p>
                 </div>
-                : status === "fail"?
+                : status === "failed"?
                 <div> 
                     <div className="check">
                       <Avatar size={200} src={url_fail} />

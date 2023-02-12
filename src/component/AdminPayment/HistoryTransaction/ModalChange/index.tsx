@@ -3,6 +3,7 @@ import React from "react";
 import { pushNotification } from "../../../../common/notification";
 import { NOTIFICATION_TYPE } from "../../../../const/notification";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { changePaymentMethod } from "../../../../service/payment-method";
 
 const formItemLayout = {
   labelCol: {
@@ -26,9 +27,27 @@ const ModalChange = (props: any) => {
   const { handleOK } = props;
 
   const handleSubmitForm = (value: any) => {
-    console.log(value);
-    pushNotification("Thành công", "Bạn vừa thay đổi phương thức thanh toán", NOTIFICATION_TYPE.SUCCESS);
-    handleOK()
+    const data = {
+      payment_method: value["checkbox-group"],
+    };
+    console.log(data);
+    changePaymentMethod(data).then((val) => {
+      handleOK();
+      pushNotification(
+        "Thành công",
+        "Bạn vừa thay đổi phương thức thanh toán",
+        NOTIFICATION_TYPE.SUCCESS
+      );
+    })
+    .catch((e) => {
+      setTimeout(()=>{
+        pushNotification(
+          "Thất bại",
+          "Thay đổi phương thức thanh toán không thành công",
+          NOTIFICATION_TYPE.ERROR
+        );
+      }, 1000);
+    });
   };
 
   const [formAddUser] = Form.useForm();
@@ -73,7 +92,7 @@ const ModalChange = (props: any) => {
           htmlType="submit"
           className="button-addNewpi"
           loading={props.loading}
-          style={{width: "50%"}}
+          style={{ width: "50%" }}
         >
           Thay đổi
         </Button>

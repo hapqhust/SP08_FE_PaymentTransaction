@@ -1,7 +1,9 @@
 import axios from "axios";
 import moment from "moment";
 
-const domain = "https://tungsnk.tech:8088";
+// const domain = "https://tungsnk.tech:8088";
+const domain = "https://laravel-production-2cf3.up.railway.app";
+
 
 function getListTransaction(data: {}) {
   const response = axios.get(`${domain}/api/admin/transactions`, {
@@ -23,10 +25,13 @@ function getStatisticByMonth() {
 }
 
 function getStatisticByPayAndRefund() {
+  // const response = axios.get(
+  //   `${domain}/api/admin/transactions/statistic-pay-and-refund?start_at=${moment()
+  //     .subtract(7, "days")
+  //     .format("YYYY-MM-DD")}&end_at=${moment().format("YYYY-MM-DD")}`
+  // );
   const response = axios.get(
-    `${domain}/api/admin/transactions/statistic-pay-and-refund?start_at=${moment()
-      .subtract(7, "days")
-      .format("YYYY-MM-DD")}&end_at=${moment().format("YYYY-MM-DD")}`
+    `${domain}/api/admin/transactions/statistic-pay-and-refund`
   );
   return response;
 }

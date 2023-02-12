@@ -169,7 +169,7 @@ const Dashboard: React.FC = () => {
           <Col span={9}>
             <Card className="card mt-3">
               <header className="title">
-                <h3 className="section__title2">gi
+                <h3 className="section__title2">
                   Biều đồ tỉ lệ các phương thức thanh toán
                 </h3>
               </header>
