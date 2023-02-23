@@ -24,6 +24,10 @@ const PaymentResult: React.FC = () => {
     return x.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
+  const moveToHome = () => {
+    window.location.href = "https://hust-e-shopper.up.railway.app";
+  };
+
   return (
     <div className="container container-payment">
       <div className="row">
@@ -47,8 +51,12 @@ const PaymentResult: React.FC = () => {
                   <p>Bạn đặt hàng không thành công, xin hãy thử lại</p>
                   <Row justify="center">
                     <Col>
-                      <button type="button" className="btn btn-home">
-                        Trở về trang chủ
+                      <button
+                        type="button"
+                        onClick={moveToHome}
+                        className="btn btn-home"
+                      >
+                        Trở về
                       </button>
                     </Col>
                   </Row>
@@ -65,8 +73,12 @@ const PaymentResult: React.FC = () => {
                   </p>
                   <Row justify="center">
                     <Col>
-                      <button type="button" className="btn btn-home">
-                        Trở về trang chủ
+                      <button
+                        type="button"
+                        onClick={moveToHome}
+                        className="btn btn-home"
+                      >
+                        Trở về
                       </button>
                     </Col>
                   </Row>
@@ -94,8 +106,12 @@ const PaymentResult: React.FC = () => {
                   </Row>
                   <Row justify="center">
                     <Col>
-                      <button type="button" className="btn btn-home">
-                        Trở về trang chủ
+                      <button
+                        type="button"
+                        onClick={moveToHome}
+                        className="btn btn-home"
+                      >
+                        Trở về
                       </button>
                     </Col>
                   </Row>
